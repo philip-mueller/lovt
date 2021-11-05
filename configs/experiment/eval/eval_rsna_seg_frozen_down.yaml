@@ -1,0 +1,21 @@
+# @package _global_
+defaults:
+  - /evaluation_model:
+      - rsna_seg_frozen_down
+
+evaluated_encoder: a
+name: ???
+
+monitor_metric: ${evaluation_model.eval_name}_val/opacity_dice
+monitor_metric_mode: max
+
+evaluation_model:
+  dataset: rsna_seg_01
+  batch_size: 8
+  learning_rate: 3e-3  #3e-3 for lcross and l, 3e-5 for global and lg (1e-5 is similar good)
+callback:
+  early_stopping:
+    patience: 20
+
+
+

@@ -1,0 +1,3 @@
+name: 'NIH_CXR_pathologies_seg'
+loader: 'NihCxrSegmentationDataset'
+path: '<path_to_datasets>/NIH_CXR_pathology_detection'

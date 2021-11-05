@@ -1,0 +1,16 @@
+# @package _global_
+defaults:
+  - /evaluation_model:
+      - object_frozen
+
+evaluated_encoder: a
+name: ???
+
+monitor_metric: ${evaluation_model.eval_name}_val/froc
+monitor_metric_mode: max
+
+callback:
+  early_stopping:
+    patience: 10
+
+average_runs: 5

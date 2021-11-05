@@ -1,0 +1,5 @@
+defaults:
+    - early_stopping
+
+early_stopping:
+    patience: 10

@@ -1,0 +1,16 @@
+defaults:
+  - train_representation_config
+  - base_config
+  - pretrain_model: base_model
+  - callback:
+      - checkpoint
+      - early_stopping
+
+logger:
+  wandb:
+    tags:
+      - pretrain
+
+
+monitor_metric: 'val/total_loss'
+monitor_metric_mode: 'min'

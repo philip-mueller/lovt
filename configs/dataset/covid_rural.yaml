@@ -1,0 +1,3 @@
+name: 'COVID Rural'
+loader: 'CovidRuralDataset'
+path: '<path_to_datasets>/Opacity-Segmentation-COVID/opacity_segmentation_covid_chest_X_ray-master/covid_rural_annot'

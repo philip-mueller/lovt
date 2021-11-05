@@ -1,0 +1,38 @@
+# @package _global_
+defaults:
+  - /evaluation_model:
+      - rsna_frozen_concat
+
+evaluated_encoder: a
+name: ???
+
+reported_metrics:
+  - "rsna_test/mAP__runs_mean"
+  - "rsna_test/mAP__runs_std"
+  - "rsna_test/mAP@0.75__runs_mean"
+  - "rsna_test/mAP@0.75__runs_std"
+  - "rsna_test/mAP@0.5__runs_mean"
+  - "rsna_test/mAP@0.5__runs_std"
+  - "rsna_val/mAP__runs_mean"
+  - "rsna_val/mAP__runs_std"
+  - "rsna_val/mAP@0.75__runs_mean"
+  - "rsna_val/mAP@0.75__runs_std"
+  - "rsna_val/mAP@0.5__runs_mean"
+  - "rsna_val/mAP@0.5__runs_std"
+
+monitor_metric: ${evaluation_model.eval_name}_val/mAP
+monitor_metric_mode: max
+
+evaluation_model:
+  dataset: rsna_01
+  batch_size: 8
+  learning_rate: 3e-4
+
+average_runs: 5
+
+callback:
+  early_stopping:
+    patience: 10  # 20
+
+
+

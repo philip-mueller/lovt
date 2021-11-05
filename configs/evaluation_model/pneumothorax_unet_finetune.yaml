@@ -1,0 +1,20 @@
+defaults:
+  - segmentation_eval
+
+dataset: siim_pneumothorax_01
+eval_name: 'pneumo_unet_finetune'
+task: 'SIIM_pneumothorax_segmentation'
+data_augmentation: false
+loss_fn: dice
+segmentation_head: unet
+freeze_encoder: false
+frozen_warmup_steps: 100
+warmup_lr: 1e-3
+
+batch_size: 64
+learning_rate: 1e-3
+weight_decay: 1e-6
+lr_reduce_patience: 3
+lr_reduce_factor: 0.5
+
+max_epochs: 100

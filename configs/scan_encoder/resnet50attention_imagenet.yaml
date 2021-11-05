@@ -1,0 +1,10 @@
+defaults:
+  - base_scan_encoder
+
+backbone_architecture: 'resnet'
+backbone_model: ['pytorch/vision:v0.6.0', 'resnet50']
+backbone_pretrained: true
+input_size: [224, 224]
+region_feature_layer: 'conv5'  # conv5=7x7, conv4=14x14, conv3=28x28
+global_feature_layer: 'local'
+global_aggregator: 'avgpool_attention'

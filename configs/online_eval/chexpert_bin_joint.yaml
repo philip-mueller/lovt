@@ -1,0 +1,6 @@
+chexpert_bin_joint:
+  task: 'chexpert_binary'
+  source_modality: 'a&b'
+
+  nonlinear: false
+  dropout_prob: 0.2

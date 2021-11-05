@@ -1,0 +1,5 @@
+name: 'MIMIC-CXR-IMG_ap/pa_find/impr'
+loader: 'MimicCxrImageDataset'
+path: '<path_to_datasets>/MIMIC-CXR/mimic-cxr_ap-pa_dataset'
+
+train_subset: 0.3

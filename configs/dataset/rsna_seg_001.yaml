@@ -1,0 +1,7 @@
+name: 'RSNA_seg'
+loader: 'RsnaPneunomiaSegmentationDataset'
+path: '<path_to_datasets>/RSNA-Pneunomia-Detection'
+
+train_subset: 0.01
+val_subset: 0.1
+

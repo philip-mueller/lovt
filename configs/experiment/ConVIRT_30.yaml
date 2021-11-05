@@ -1,0 +1,41 @@
+# @package _global_
+defaults:
+  - /online_eval:
+      - chexpert_bin_scan
+      - chexpert_bin_report
+  - /objective@pretrain_model.g_alignment: global_contrastive
+  - /scan_encoder@pretrain_model.encoder_a: resnet50_imagenet
+  - /report_encoder@pretrain_model.encoder_b: bioclinicalbert_sentences
+
+name: 'ConVIRT_30'
+pretrain_dataset: mimic-cxr_ap-pa_find-impr_03
+
+callback:
+  early_stopping:
+    patience: 15
+
+pretrain_model:
+  loss_weights:
+    global_a2b: 0.75  # scan with negatives from report
+    global_b2a: 0.25  # report with negatives from scan
+
+  encoder_a:
+    data_augmentation:
+      augment: true
+      random_horizontal_flip: true
+  encoder_b:
+    data_augmentation:
+      augment: true
+      sentence_shuffling: null
+      sentence_sampling: random_sentence
+      duplicate_sentences: false
+
+  projection_norm: null
+  batch_size: 32
+  learning_rate: 1e-5
+  weight_decay: 1e-6
+  lr_scheduler:
+    - reduce_on_plateau
+  lr_reduce_patience: 12
+  lr_reduce_factor: 0.5
+  max_epochs: 500

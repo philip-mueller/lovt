@@ -1,0 +1,11 @@
+defaults:
+  - pneumothorax_unet_finetune
+
+dataset: siim_pneumothorax
+eval_name: 'pneumo_unet_finetune_full'
+loss_fn: dice
+batch_size: 64
+learning_rate: 1e-3
+lr_reduce_patience: 3
+
+max_epochs: 50

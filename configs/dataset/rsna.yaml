@@ -1,0 +1,6 @@
+name: 'RSNA'
+loader: 'RsnaPneunomiaDetectionDataset'
+path: '<path_to_datasets>/RSNA-Pneunomia-Detection'
+
+val_subset: 0.1
+

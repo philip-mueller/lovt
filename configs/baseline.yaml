@@ -1,0 +1,8 @@
+defaults:
+  - baseline_config
+  - base_config
+
+logger:
+  wandb:
+    tags:
+      - baseline

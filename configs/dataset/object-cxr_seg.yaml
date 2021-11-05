@@ -1,0 +1,5 @@
+name: 'Object-CXR_seg'
+loader: 'ObjectCxrSegmentationDataset'
+path: '<path_to_datasets>/object-CXR'
+
+

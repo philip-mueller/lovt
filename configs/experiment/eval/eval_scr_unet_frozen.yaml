@@ -1,0 +1,19 @@
+# @package _global_
+defaults:
+  - /evaluation_model:
+      - scr_unet_frozen
+
+evaluated_encoder: a
+name: 'scr_frozen_la025_01'
+
+monitor_metric: '${evaluation_model.eval_name}_val/loss'
+monitor_metric_mode: min
+
+trainer:
+  limit_train_batches: 0.1
+evaluation_model:
+  batch_size: 8
+  learning_rate: 3e-4
+  lr_reduce_patience: 5
+
+

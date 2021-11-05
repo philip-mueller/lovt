@@ -1,0 +1,7 @@
+chexpert_bin_report:
+  task: 'chexpert_binary'
+  source_modality: 'b'
+
+  nonlinear: false
+  dropout_prob: 0.2
+

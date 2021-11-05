@@ -1,0 +1,6 @@
+chexpert_bin_scan:
+  task: 'chexpert_binary'
+  source_modality: 'a'
+
+  nonlinear: false
+  dropout_prob: 0.2

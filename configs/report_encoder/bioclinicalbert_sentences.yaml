@@ -1,0 +1,21 @@
+defaults:
+  - base_report_encoder
+
+language_encoder: 'emilyalsentzer/Bio_ClinicalBERT'
+max_length: 512
+freeze_embeddings: true
+freeze_encoder_layers: 6  # freeze first 6 encoder layers (see ConVIRT)
+
+# options: 'max', 'avg', 'avgpool_attention'
+global_aggregator: max
+
+# options: 'tokens' or 'sentences'
+local_from: sentences
+# options: 'max', 'avg'
+sentence_aggregator: max
+
+data_augmentation:
+  augment: true
+  sentence_shuffling: random_swaps
+  sentence_sampling: null
+  duplicate_sentences: false

@@ -1,0 +1,16 @@
+# @package _global_
+defaults:
+  - /evaluation_model:
+      - rsna_frozen_full
+
+evaluated_encoder: a
+name: ???
+
+monitor_metric: ${evaluation_model.eval_name}_val/mAP
+monitor_metric_mode: max
+
+callback:
+  early_stopping:
+    patience: 10
+
+average_runs: 5

@@ -1,0 +1,11 @@
+defaults:
+  - rsna_seg_frozen
+
+dataset: rsna_seg_001
+eval_name: 'rsna_seg_lin_1'
+loss_fn: dice
+batch_size: 8
+learning_rate: 1e-2
+lr_reduce_patience: 3
+
+max_epochs: 500

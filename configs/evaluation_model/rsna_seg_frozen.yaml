@@ -1,0 +1,18 @@
+defaults:
+  - segmentation_eval
+
+dataset: rsna_seg_01
+eval_name: 'rsna_seg_lin'
+task: 'rsna_pneunomia_detection'
+data_augmentation: false
+loss_fn: dice
+segmentation_head: linear
+freeze_encoder: true
+
+batch_size: 64  # 8
+learning_rate: 3e-2  # lg_watt: 3e-2, old: 3e-3 for lcross and l, 3e-5 for global and lg (1e-5 is similar good)
+weight_decay: 1e-6
+lr_reduce_patience: 3
+lr_reduce_factor: 0.5
+
+max_epochs: 100

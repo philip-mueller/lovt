@@ -1,0 +1,11 @@
+defaults:
+  - rsna_finetune
+
+dataset: rsna
+eval_name: 'rsna_finetune_full'
+
+batch_size: 64
+learning_rate: 1e-4
+lr_reduce_patience: 3
+
+max_epochs: 50

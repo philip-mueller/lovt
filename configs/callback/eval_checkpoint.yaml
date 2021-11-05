@@ -1,0 +1,5 @@
+defaults:
+    - checkpoint
+
+model_checkpoint:
+    filename: '${...evaluation_model.eval_name}-{epoch:04d}'

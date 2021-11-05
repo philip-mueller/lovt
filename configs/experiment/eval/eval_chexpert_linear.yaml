@@ -1,0 +1,11 @@
+# @package _global_
+defaults:
+  - /evaluation_model:
+      - chexpert_linear
+
+evaluated_encoder: a
+name: 'eval_chexpert_linear'
+
+monitor_metric: '${evaluation_model.eval_name}_val/auroc'
+monitor_metric_mode: max
+

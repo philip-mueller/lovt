@@ -1,0 +1,11 @@
+# @package _global_
+defaults:
+  - /evaluation_model: covid_unet_finetune
+  - /experiment/eval: baseline_random
+
+monitor_metric: ${evaluation_model.eval_name}_val/opacity_dice
+monitor_metric_mode: max
+
+callback:
+  early_stopping:
+    patience: 20

@@ -1,0 +1,26 @@
+defaults:
+  - detection_eval
+
+dataset: rsna_01
+eval_name: 'rsna_finetune'
+task: 'rsna_pneunomia_detection'
+data_augmentation: false
+
+detection_head: YOLOv3
+extracted_layers: ['conv3', 'conv4', 'conv5']
+anchors:
+  - [[64.64, 48.6], [84.24, 106.92], [201.42, 176.04]]
+  - [[16.2, 32.94], [33.48, 24.3], [31.86, 64.26]]
+  - [[5.4, 7.02], [8.64, 16.2], [17.82, 12.42]]
+
+freeze_encoder: false
+frozen_warmup_steps: 100
+warmup_lr: 1e-3
+
+batch_size: 64
+learning_rate: 3e-4
+weight_decay: 1e-6
+lr_reduce_patience: 3
+lr_reduce_factor: 0.5
+
+max_epochs: 100

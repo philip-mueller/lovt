@@ -1,0 +1,18 @@
+defaults:
+  - segmentation_eval
+
+dataset: object-cxr_seg
+eval_name: 'object_seg_lin_full'
+task: 'object_cxr'
+data_augmentation: false
+loss_fn: dice
+segmentation_head: linear
+freeze_encoder: true
+
+batch_size: 64
+learning_rate: 1e-2
+weight_decay: 1e-6
+lr_reduce_patience: 3
+lr_reduce_factor: 0.5
+
+max_epochs: 100

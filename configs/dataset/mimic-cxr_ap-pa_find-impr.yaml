@@ -1,0 +1,3 @@
+name: 'MIMIC-CXR_ap/pa_find/impr'
+loader: 'MimicCxrDataset'
+path: '<path_to_datasets>/MIMIC-CXR/mimic-cxr_ap-pa_dataset'

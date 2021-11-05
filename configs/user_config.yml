@@ -1,0 +1,7 @@
+models:
+  base_path: ???
+  pretrained_models_folder: pretraining
+
+wandb:
+  user: ???
+  project: lovt

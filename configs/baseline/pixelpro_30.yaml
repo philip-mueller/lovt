@@ -1,0 +1,12 @@
+defaults:
+  - base_model_config
+  - resnet50
+projection_size: 256
+ssl_method: PixelPro
+
+dataset: mimic-cxr-img_ap-pa_find-impr_03
+batch_size: 16
+learning_rate: 1e-3
+weight_decay: 1e-5
+
+max_epochs: 100

@@ -1,0 +1,5 @@
+name: 'Object-CXR'
+loader: 'ObjectCxrDetectionDataset'
+path: '<path_to_datasets>/object-CXR'
+
+

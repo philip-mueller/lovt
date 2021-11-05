@@ -1,0 +1,4 @@
+backbone_architecture: 'resnet'
+backbone_model: ['pytorch/vision:v0.6.0', 'resnet50']
+backbone_pretrained: true
+input_size: [224, 224]

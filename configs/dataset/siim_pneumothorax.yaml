@@ -1,0 +1,3 @@
+name: 'SIIM_pneumothorax'
+loader: 'SIIMSegmentationDataset'
+path: '<path_to_datasets>/siim-acr-pneumothorax-segmentation'

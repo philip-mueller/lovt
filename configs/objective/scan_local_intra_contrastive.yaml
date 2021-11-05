@@ -1,0 +1,11 @@
+defaults:
+  - local_intra_contrastive
+
+similarity_temperature: 0.3
+distance_threshold: 0.5
+threshold_type: relative
+negatives_from_same_modality: false
+normalize_by_num_negatives: false
+
+smooth_weights: true
+smooth_lambda: 1.0

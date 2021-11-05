@@ -1,0 +1,56 @@
+name: lovt
+channels:
+  - pytorch
+  - huggingface
+  - stanfordnlp
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.9
+  - pip
+  - pylint
+
+  - numpy>=1.20
+  - pandas>=1.2.3
+  - pyarrow=5.0.0
+  - matplotlib>=3.3.4
+  - pytorch=1.10.0
+  - cudatoolkit=10.2
+
+  - torchvision=0.11.1
+  - pytorch-lightning=1.4.9
+  - datasets>=1.2.1
+  - tokenizers>=0.10.1
+  - transformers>=4.4.0
+  - nltk>=3.4.4
+  - stanza>=1.2
+  - pillow=8.2
+
+  - scikit-image
+
+  - click>=7.1
+  - tqdm
+
+  - wandb>=0.10.20
+
+  - pip:
+    - hydra-core==1.1.1
+    - omegaconf==2.1.1
+    - lightning-bolts==0.4.0
+    - segmentation_models_pytorch
+    - seaborn
+    - pydicom
+    - jupyter
+
+    # for pl-bolts
+    - gym
+    - sklearn
+    - opencv-python
+    - git+https://github.com/bes-dev/mean_average_precision.git
+    - deepdiff
+
+    # baselines
+    - byol-pytorch
+    - pixel-level-contrastive-learning
+    - simclr

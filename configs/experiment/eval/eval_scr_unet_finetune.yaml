@@ -1,0 +1,20 @@
+# @package _global_
+defaults:
+  - /evaluation_model:
+      - scr_unet_finetune
+
+evaluated_encoder: a
+name: 'scr_finetune_l025_01'
+
+monitor_metric: '${evaluation_model.eval_name}_val/loss'
+monitor_metric_mode: min
+
+trainer:
+  limit_train_batches: 0.1
+evaluation_model:
+  frozen_warmup_steps: 100  #200  # 100 #50  #10 # 200
+  warmup_lr: 3e-4
+  batch_size: 8
+  learning_rate: 3e-5  #3e-4  # more?
+  lr_reduce_patience: 5
+

@@ -1,0 +1,8 @@
+defaults:
+  - local_intra_contrastive
+
+similarity_temperature: 0.3
+distance_threshold: 0
+threshold_type: absolute
+negatives_from_same_modality: false
+normalize_by_num_negatives: false

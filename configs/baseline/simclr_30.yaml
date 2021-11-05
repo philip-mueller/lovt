@@ -1,0 +1,13 @@
+defaults:
+  - base_model_config
+  - resnet50
+projection_size: 128
+temperature: 0.1
+
+dataset: mimic-cxr-img_ap-pa_find-impr_03
+batch_size: 128
+learning_rate: 3e-4
+weight_decay: 1e-4
+
+warmup_epochs: 1
+max_epochs: 100

@@ -1,0 +1,24 @@
+# @package _global_
+defaults:
+  - /evaluation_model:
+      - chexpert_linear
+  - /encoder:
+      - base_scan_encoder
+
+encoder:
+  backbone_architecture: 'resnet'
+  backbone_model: [ 'pytorch/vision:v0.6.0', 'resnet50' ]
+  backbone_pretrained: false
+  input_size: [ 224, 224 ]
+  region_feature_layer: 'conv3'
+  global_feature_layer: 'conv5'  # before avg pool and FC
+  global_aggregator: 'avg'  # as used in ResNet
+
+  data_augmentation:
+    augment: false
+
+monitor_metric: '${evaluation_model.eval_name}_val/auroc'
+monitor_metric_mode: 'max'
+
+name: 'baseline_random_chexpert_linear'
+

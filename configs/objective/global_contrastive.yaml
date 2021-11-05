@@ -1,0 +1,5 @@
+defaults:
+  - base_global_contrastive
+
+similarity_temperature: 0.1
+negatives_from_same_modality: false

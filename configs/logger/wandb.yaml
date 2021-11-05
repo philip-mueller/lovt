@@ -1,0 +1,9 @@
+wandb:
+    _target_: pytorch_lightning.loggers.wandb.WandbLogger
+    project: "lovt"
+    job_type: "train"
+    group: ""
+    save_dir: "."
+    name: ${name}
+    log_model: true
+    reinit: true

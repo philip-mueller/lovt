@@ -1,0 +1,39 @@
+# @package _global_
+defaults:
+  - /online_eval:
+      - chexpert_bin_scan
+      - chexpert_bin_report
+  - /objective@pretrain_model.ll_alignments_a.0: scan_local_intra_contrastive
+  - /objective@pretrain_model.ll_alignments_b.0: report_sent_intra_contrastive
+  - /scan_encoder@pretrain_model.encoder_a: resnet50attention_imagenet
+  - /report_encoder@pretrain_model.encoder_b: bioclinicalbert_sentences
+
+name: 'ablation_no_g'
+pretrain_dataset: mimic-cxr_ap-pa_find-impr_03
+
+num_dataloader_workers: 20
+trainer:
+  accumulate_grad_batches: 16
+
+callback:
+  early_stopping:
+    patience: 10
+
+pretrain_model:
+  loss_weights:
+    local_a_l2att: 0.375
+    local_a_att2l: 0.375
+    local_b_l2att: 0.375
+    local_b_att2l: 0.375
+
+
+  optimizer: AdamW
+  lr_scheduler:
+    - cosine_annealing_per_epoch
+  learning_rate: 1e-4
+  weight_decay: 1e-6
+  batch_size: 32
+  max_epochs: 100
+
+  projection_norm: batch
+

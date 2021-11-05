@@ -1,0 +1,3 @@
+upload_config_to_wandb_as_artifact:
+    _target_: imports.UploadConfigToWandbAsArtifact
+    config_dir: hydra

@@ -1,0 +1,11 @@
+defaults:
+  - fine_tune_config
+  - base_config
+  - callback:
+      - eval_checkpoint
+      - eval_early_stopping
+
+logger:
+  wandb:
+    tags:
+      - downstream

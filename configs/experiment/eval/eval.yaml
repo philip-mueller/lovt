@@ -1,0 +1,9 @@
+# @package _global_
+evaluated_encoder: a
+name: ???
+
+callback:
+  early_stopping:
+    patience: 10
+
+average_runs: 5
