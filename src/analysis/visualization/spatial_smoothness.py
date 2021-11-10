@@ -9,6 +9,7 @@ import torch.nn.functional as F
 from datasets import tqdm
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 
 log = logging.getLogger(__name__)
 from analysis.postprocess_run import PretrainingRun
@@ -52,28 +53,22 @@ def plot_spatial_smoothness(run: PretrainingRun, dataset=None, data='test', plot
     coord_dists = torch.cat(coord_dists, dim=0).flatten().numpy()
     cos_emb = torch.cat(cos_emb, dim=0).flatten().numpy()
 
-    log.info('Computing means...')
-    df = pd.DataFrame({'coord_dists': coord_dists, 'cos_emb': cos_emb})
-    df['coord_dists'] = df['coord_dists'].round(2)
-    df_by_ccoord_dists: pd.DataFrame = df.groupby('coord_dists')\
-        .mean()\
-        .sort_index()
-    mean_cos_a = df_by_ccoord_dists['cos_emb'].values
-    ordered_coord_dists = df_by_ccoord_dists.index.values
+    non_rounded_df = pd.DataFrame({'coord_dist': coord_dists, 'cos_sim': cos_emb})
+    df = non_rounded_df.copy().sort_values('coord_dist')
+    df['coord_dist'] = df['coord_dist'].round(1).astype('category')
 
     log.info('Plotting...')
     fig, ax = plt.subplots()
-    ax.scatter(x=coord_dists, y=cos_emb, alpha=0.5, marker='.')
-    ax.plot(ordered_coord_dists, mean_cos_a, c='tab:orange', alpha=0.3, linestyle='--')
-
+    sns.violinplot(data=df, x='coord_dist', y='cos_sim', positions=[0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9],
+                   color='tab:blue', width=0.8, scale='count', inner='quartiles', ax=ax, alpha=0.8)
     ax.set_xlabel('Spatial Distance of Region Pair')
     ax.set_ylabel('Cosine Similarity of Region Embeddings Pair')
+    ax.set_xticklabels(['0.0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8', '0.9'])
     plt.tight_layout()
     plot_folder = os.path.join(run.run_path, 'plots')
     os.makedirs(plot_folder, exist_ok=True)
     emb_name = 'zl' if plot_zl else 'yl'
     dataset_infix = dataset + '_' if dataset is not None else ''
-    path = os.path.join(plot_folder, f'spatial_smoothness_{emb_name}_{dataset_infix}{data}.png')
+    path = os.path.join(plot_folder, f'spatial_smoothness_{emb_name}_{dataset_infix}{data}.pdf')
     plt.savefig(path, dpi=1000)
-    #plt.show()
     log.info(f'Plot saved to {path}')
