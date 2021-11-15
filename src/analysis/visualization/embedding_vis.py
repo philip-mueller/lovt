@@ -11,6 +11,12 @@ from sklearn.manifold import TSNE
 from tqdm import tqdm
 
 
+if __name__ == '__main__':
+    scripts_path = Path(os.path.realpath(__file__)).absolute().parent
+    root_path = scripts_path.parent
+    sys.path.append(str(root_path))
+
+
 from analysis.downstream_embeddings import LocalScanDownstreamEmbeddings
 from data.datasets.chexpert.chexpert_dataset import chexpert_labels
 from analysis.postprocess_run import PretrainingRun, ModelData
@@ -326,10 +332,10 @@ def plot_tsne_zl(run: PretrainingRun, data='test', limit_samples=None,
     if include_attended:
         plotter.plot(f'zl',
                  colors=['tab:blue', 'tab:orange', 'tab:purple', 'tab:red'], markers=['o', 'o', 'x', 'x'],
-                     labels=['scan', 'report', 'scan-attended', 'report-attended'])
+                     labels=['Image regions', 'Report sentences', 'Report-to-image', 'Image-to-report'])
     else:
         plotter.plot(f'zl',
-                 colors=['tab:blue', 'tab:orange'], markers=['o', 'o'], labels=['scan', 'report'])
+                 colors=['tab:blue', 'tab:orange'], markers=['o', 'o'], labels=['Image regions', 'Report sentences'])
 
 
 def plot_tsne_zg(run: PretrainingRun, data='test', limit_samples=None,
@@ -349,7 +355,7 @@ def plot_tsne_zg(run: PretrainingRun, data='test', limit_samples=None,
                         limit_samples=limit_samples)
 
     plotter.plot(f'zg',
-                 colors=['tab:blue', 'tab:orange'], markers=['o', 'o'], labels=['scan', 'report'])
+                 colors=['tab:blue', 'tab:orange'], markers=['o', 'o'], labels=['Image', 'Report'])
 
 
 def plot_embeddings(run):
@@ -366,3 +372,10 @@ def plot_downstream_embeddings(run):
     plot_tsne_yl_downstream_sample_class(run, 'rsna_seg', limit_samples=100)
     plot_tsne_yg_downstream_sample_class(run, 'rsna_seg')
 
+
+if __name__ == '__main__':
+    logging.basicConfig(
+        format="%(asctime)s - %(levelname)s - %(name)s -   %(message)s",
+        datefmt="%m/%d/%Y %H:%M:%S",
+        level=logging.INFO,
+    )

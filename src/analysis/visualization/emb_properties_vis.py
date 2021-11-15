@@ -10,7 +10,7 @@ import torch
 from tqdm import tqdm
 import torch.nn.functional as F
 
-from analysis.data_exporter import get_paper_data, load_analysis_results, RESULTS_PATH, get_run_definitions_dict, \
+from analysis.data_exporter import get_paper_data, load_analysis_results, RESULTS_PATH, \
     get_run_definitions_df
 from analysis.postprocess_run import PretrainingRun
 from metrics.embedding_metrics import prepare_mask
@@ -206,8 +206,8 @@ def plot_modality_alignment(df):
 
     fig, ax = plt.subplots()
 
-    ax.barh(y_pos, assign_s2r, height=0.6, label=r'Scan ($\mathbf{z}_s$)', alpha=0.5)
-    ax.barh(y_pos, assign_r2s, height=0.6, left=1 - assign_r2s, label=r'Report ($\mathbf{z}_r$)', alpha=0.5)
+    ax.barh(y_pos, assign_s2r, height=0.6, label=r'Image regions ($\mathbf{z}^\mathcal{I}$)', alpha=0.5)
+    ax.barh(y_pos, assign_r2s, height=0.6, left=1 - assign_r2s, label=r'Report sentences ($\mathbf{z}^\mathcal{R}$)', alpha=0.5)
     ax.vlines(0.5, -0.6, len(labels) - 0.4 + 0.6, colors='black', alpha=0.3, linestyle='--')
     for i, score in enumerate(assignment_score):
         ax.text(0.5, i, '{:.0f} %'.format(score * 100), horizontalalignment='center',
@@ -218,7 +218,7 @@ def plot_modality_alignment(df):
     ax.set_yticks(y_pos)
     ax.set_yticklabels(labels, rotation=45, fontsize=8, ha='right', rotation_mode='anchor')
     ax.set_xticks([0., 0.5, 1.0])
-    ax.set_xticklabels(['scan', 'indistinguishable', 'report'])
+    ax.set_xticklabels(['Image', 'Indistinguishable', 'Report'])
     ax.legend(loc='upper center', ncol=2, fontsize='small')
     plt.tight_layout()
     plt.savefig(os.path.join(RESULTS_PATH, 'generated', f'local_modality_assignment.pdf'), bbox_inches="tight")
@@ -300,8 +300,8 @@ def plot_alignment(run_definitions, normalized=True):
     ax.set_ymargin(0.2)
     ax.set_xticks(df['positions'])
     ax.set_xticklabels(df['paper_name'], rotation=45, fontsize=8, ha='right', rotation_mode='anchor')
-    scan_legend = mpatches.Patch(color='tab:blue', alpha=0.5, label='Report -> Scan')
-    report_legend = mpatches.Patch(color='tab:orange', alpha=0.5, label='Scan -> Report')
+    scan_legend = mpatches.Patch(color='tab:blue', alpha=0.5, label='Report-to-image')
+    report_legend = mpatches.Patch(color='tab:orange', alpha=0.5, label='Image-to-report')
     ax.legend(handles=[scan_legend, report_legend], loc='upper center', fontsize='small', ncol=2)
     ax.set_ylabel(r'Alignment quality ($\ell_2$-distance)')
     fig.savefig(os.path.join(RESULTS_PATH, 'generated', f'local_alignment{name_postfix}.pdf'), bbox_inches="tight")
@@ -327,13 +327,13 @@ def plot_emb_properties(category=None, skip_alignment=False):
     df_a = calculate_rows(df, emb_l='yl_a', emb_g='yg_a', d_l=2048, d_g=2048)
     df_b = calculate_rows(df, emb_l='yl_b', emb_g='yg_b', d_l=768, d_g=768)
 
-    compute_emb_properties_table(df_a, name='y_a', modality='s')
+    compute_emb_properties_table(df_a, name='y_a', modality='i')
     compute_emb_properties_table(df_b, name='y_b', modality='r')
 
-    plot_variances(df_a, name='y_a', modality='s')
+    plot_variances(df_a, name='y_a', modality='i')
     plot_variances(df_b, name='y_b', modality='r')
-    plot_uniformity(df_a, name='y_a', modality='s')
+    plot_uniformity(df_a, name='y_a', modality='i')
     plot_uniformity(df_b, name='y_b', modality='r')
-    plot_cov(df_a, name='y_a', modality='s')
+    plot_cov(df_a, name='y_a', modality='i')
     plot_cov(df_b, name='y_b', modality='r')
     plot_modality_alignment(df)
