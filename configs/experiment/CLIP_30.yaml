@@ -1,0 +1,40 @@
+# @package _global_
+defaults:
+  - /online_eval:
+      - chexpert_bin_scan
+      - chexpert_bin_report
+  - /objective@pretrain_model.g_alignment: global_contrastive
+  - /scan_encoder@pretrain_model.encoder_a: resnet50attention_imagenet
+  - /report_encoder@pretrain_model.encoder_b: bioclinicalbert_sentences
+
+name: 'CLIP_30'
+pretrain_dataset: mimic-cxr_ap-pa_find-impr_03
+
+num_dataloader_workers: 20
+trainer:
+  accumulate_grad_batches: 16
+
+callback:
+  early_stopping:
+    patience: 10
+
+pretrain_model:
+  loss_weights:
+    global_a2b: 0.75  # scan with negatives from report
+    global_b2a: 0.25  # report with negatives from scan
+
+
+  optimizer: AdamW
+  lr_scheduler:
+    - cosine_annealing_per_epoch
+  learning_rate: 1e-4
+  weight_decay: 1e-6
+  batch_size: 32
+  max_epochs: 100
+
+  projection_norm: batch
+  encoder_b:
+    data_augmentation:
+      sentence_shuffling: null
+      sentence_sampling: random_sentence
+      duplicate_sentences: false

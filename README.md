@@ -1,22 +1,22 @@
-# Localized Vision-Text Pre-Training
-Contrastive learning has proven effective for pre-
-training image models on unlabeled data and achieved
-great results in medical image classification. Using paired
-text like radiology reports during pre-training improved the
-results even further. Still, most existing methods target im-
-age classification as downstream tasks and may not be opti-
-mal for localized tasks like semantic segmentation or object
-detection. We therefore propose LoVT, to our best knowl-
-edge, the first text-supervised pre-training method that tar-
-gets localized medical imaging tasks. Our method com-
-bines instance-level scan-report contrastive learning with
-local contrastive learning on scan region and report sen-
-tence representations. We evaluate LoVT and commonly
-used pre-training methods on a novel evaluation framework
-consisting of 18 localized tasks on chest X-rays from five
-public datasets. While there is no single best method, LoVT
-performs best on 11 out of the 18 studied tasks making it the
-method of choice for localized tasks
+# Joint Learning of Localized Representations from Medical Images and Reports
+[[arXiv:2112.02889 - Joint Learning of Localized Representations
+from Medical Images and Reports](https://arxiv.org/abs/2112.02889)]
+
+Contrastive learning has proven effective for pre-training im-
+age models on unlabeled data with promising results for tasks such as
+medical image classification. Using paired text (like radiological reports)
+during pre-training improves the results even further. Still, most existing methods 
+target image classification downstream tasks and may
+not be optimal for localized tasks like semantic segmentation or object
+detection. We therefore propose Localized representation learning from
+Vision and Text (LoVT), to our best knowledge, the first text-supervised
+pre-training method that targets localized medical imaging tasks. Our
+method combines instance-level image-report contrastive learning with
+local contrastive learning on image region and report sentence representations. 
+We evaluate LoVT and commonly used pre-training methods
+on a evaluation framework of 18 localized tasks on chest X-rays from
+five public datasets. LoVT performs best on 10 of the 18 studied tasks
+making it the preferred method of choice for localized tasks.
 
 ## Results
 ![Results on the RSNA pneumonia detection dataset](results/generated/results_table_rsna.png)
@@ -196,10 +196,20 @@ To train it on 30% of the data call:
 
     python src/scripts/run_training.py +experiment=ConVIRT_30
 
+#### CLIP
+CLIP is pre-trained using our LoVT code but with a different experiment config.
+To train the CLIP model on 100% of the data with the same setting as in our paper call:
+
+    python src/scripts/run_training.py +experiment=CLIP_100
+
+To train it on 30% of the data call:
+
+    python src/scripts/run_training.py +experiment=CLIP_30
+
 
 ## Evaluation
 ### LoVT or ConVIRT
-To evaluate LoVT or ConVIRT model or models created by another experiment config use:
+To evaluate LoVT, CLIP, ConVIRT, or models created by another experiment config use:
 
     python src/analysis/evaluation_job.py evaluate_downstream <model name>
 
