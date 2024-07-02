@@ -1,8 +1,17 @@
 # Joint Learning of Localized Representations from Medical Images and Reports
-[[arXiv:2112.02889 - Joint Learning of Localized Representations
-from Medical Images and Reports](https://arxiv.org/abs/2112.02889)]
+This is the official PyTorch implementation of LoVT (ECCV 2022).
 
-Contrastive learning has proven effective for pre-training im-
+**[[Paper - arXiv:2112.02889]](https://arxiv.org/abs/2112.02889) | [[Paper - ECCV 2022]](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136860670.pdf) | [[DOI: 10.1007/978-3-031-19809-0_39]](https://doi.org/10.1007/978-3-031-19809-0_39)**
+
+> **Joint Learning of Localized Representations from Medical Images and Reports (ECCV 2022)** <br>
+> Philip Müller, Georgios Kaissis, Congyu Zou, Daniel Rueckert <br>
+
+<p align="center">
+<img src="results/LoVT.png" width=80% height=80%
+class="center">
+</p>
+
+> **Abstract:** Contrastive learning has proven effective for pre-training im-
 age models on unlabeled data with promising results for tasks such as
 medical image classification. Using paired text (like radiological reports)
 during pre-training improves the results even further. Still, most existing methods 
@@ -17,6 +26,16 @@ We evaluate LoVT and commonly used pre-training methods
 on a evaluation framework of 18 localized tasks on chest X-rays from
 five public datasets. LoVT performs best on 10 of the 18 studied tasks
 making it the preferred method of choice for localized tasks.
+
+
+## Outline
+
+1. [Results](#results)
+2. [Setup and Preparation](#setup-and-preparation)
+3. [Pre-Training](#pre-training)
+4. [Evaluation](#evaluation)
+5. [Analysis and Plotting](#analysis-and-plotting)
+6. [Citation](#citation)
 
 ## Results
 ![Results on the RSNA pneumonia detection dataset](results/generated/results_table_rsna.png)
@@ -281,3 +300,16 @@ specify the runs to be plotted in `results/runs_paper.csv` and run the following
 This includes all runs in `results/runs_paper.csv` with the specified category and stores the plots at `results/generated`.
 In `results/runs_paper.csv` the `name` must match the model name and `paper_name` will be used in the legends, `baseline` should be set to true for baseline models,
 `has_local` and `has_global` should be set accordingly to whether the model uses local or global losses, and `order` specifies the order in which the models are shown in plots.
+
+## Citation
+```
+@inproceedings{mueller2022lovt,
+  title = {Joint Learning of Localized Representations from Medical Images and Reports,
+  author = {M{\"u}ller, Philip and Kaissis, Georgios and Zou, Congyu and Rueckert, Daniel},
+  booktitle = {Computer Vision -- ECCV 2022},
+  doi={10.1007/978-3-031-19809-0_39},
+  year={2022},
+  pages = {685--701},
+}
+```
+
